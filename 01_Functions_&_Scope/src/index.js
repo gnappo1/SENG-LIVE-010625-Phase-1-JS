@@ -1,5 +1,4 @@
 "use strict"
-
 //Data 
 const inventory = [
   {
@@ -75,14 +74,46 @@ and returns the price formatted as a string. formatPrice(10) => '$10.00'
 
 //! Start here!
 //! Function Declaration (function keyword and no variables are instantiated)
+//! they are fully hoisted -> consequence: you can use the function in a line prior to its definition
+// console.log(formatPriceDeclaration(20))
 
+function formatPriceDeclaration(price) {
+  return "$" + parseFloat(price).toFixed(2)
+}
 
-//! 💡 Arrow functions vs regular functions
+//! 💡 Arrow function Expression vs regular functions
+//! Function expressions are functions stored inside a variable
 // ✅ create an arrow function version of the formatPrice function
+//! Arrow functions are more succinct, readable, minimalistic
+//! perfectly suited for callbacks
+//! an implicit return if you stay next to the arrow
+//! let and const variables are partially hoisted, but you get a referenceError if you try to use them before their declaration line (Temporal Dead Zone)
+
+// console.log(formatPrice(10))
+const formatPrice = (price) => ("$" + parseFloat(price).toFixed(2))
+
+
+// const formatPrice2 = function(price) {
+//   return "$" + parseFloat(price).toFixed(2)
+// }
+
 
 // ✅ create a blurb() function that accepts a book as an argument and logs a message in the following format:
 // 'Eloquent JavaScript: A Modern Introduction to Programming by Marjin Haverbeke is on sale for $10.00'
 
+function blurb(book) {
+  return `${book.title} by ${book.author} is on sale for ${formatPrice(book.price)}`
+}
+
+// console.log(blurb({
+//   id: 1,
+//   title: 'Eloquent JavaScript: A Modern Introduction to Programming',
+//   author: 'Marjin Haverbeke',
+//   price: 10.00,
+//   reviews: [{ userID: 1, content: 'Good book, but not great for new coders' }],
+//   inventory: 10,
+//   imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/51IKycqTPUL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg'
+// }))
 
 //! 💡 Scope
 
@@ -105,22 +136,43 @@ function scopey() {
 
 // scopey()
 
-// After Break
 
 // ✅ Create a function called `log` that takes a function and its argument as arguments
 // and logs a message explaining the name of the function, the argument passed and 
 // the return value
 
+//! callbacks are functions that are passed to another function as arguments, and its execution is delayed in time
+function sayHello(name) {
+  return `Hello ${name}`
+}
+
+//! fn, the inner function, is called callback
+//! log is the parent function, and therefore called Higher Order Function
+
+function log(fn, name) {
+  return `The function name is ${fn.name}, the argument is ${name} and the return values is ${fn(name)}`
+}
+
+// console.log(log(sayHello, "Matteo"))
 
 //! 💡 Practice using callbacks for iteration
 //! HIGHER ORDER ITERATORS
 
 // ✅ Print out each book name in our inventory both with iterators and regular loops
-
 // ✅ Create an array of strings from the inventory in the following format:
 // 'Eloquent JavaScript: A Modern Introduction to Programming by Marjin Haverbeke is on sale for $10.00'
 
-//! 💡 When do I use forEach vs map?
+// for (let i = 0; i < inventory.length; i++) {
+  //   console.log(inventory[i].title)
+  // }
+  
+  //! 💡 When do I use forEach vs map?
+  //! forEach is the parent Higher Order Function, only iterates over each element, it returns undefined
+  //! map will create a new array for you, populate it with the return values of the callback and then return it for you
+  
+  // inventory.forEach(bookObj => console.log(bookObj.title))
+  //! bookObj => console.log(bookObj.title) THIS IS THE CALLBACK FUNCTION
+  console.log(inventory.map(bookObj => bookObj.title))
 
 // ✅ Find all the books with price over $25.00
 //! 💡 When do I use filter vs find?

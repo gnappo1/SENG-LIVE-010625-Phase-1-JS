@@ -116,13 +116,27 @@ const handleSubmit = (e) => {
     const newBook = {
         title: e.target.title.value,
         author: e.target.author.value,
-        price: e.target.price.valueAsNumber,
+        price: Number(e.target.price.value),
         inventory: e.target.inventory.valueAsNumber,
         imageUrl: e.target.imageUrl.value,
     }
+
+
+    const createBook = async () => {
+        const response = await fetch("http://localhost:3000/books", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newBook)
+        })
+        const createdBook = await response.json()
+        renderBookAsHTML(createdBook)
+        e.target.reset() // EMPTY THE FORM
+    }
+    createBook()
+
     // what do I do with the object
-    renderBookAsHTML(newBook)
-    e.target.reset() // EMPTY THE FORM
 }
 
 // bookForm.addEventListener('submit', e => handleSubmit(e, somethingElse))
@@ -134,4 +148,19 @@ bookForm.addEventListener('submit', handleSubmit)
 //! Access Data From the json-server and leverage the existing functions to make 
 //! sure we still see the books and store details
 
-////////////////////////////////////////////////////////////////
+const fetchData = async url => {
+    try {
+        const response = await fetch(url) //! the default method is GET
+        const data = await response.json()
+        return data
+    } catch (error) {
+        alert(error)
+    }
+}
+
+
+//! Invoke the logic here
+fetchData("http://localhost:3000/books")
+.then(books => books.forEach(bookObj => renderBookAsHTML(bookObj)))
+// .then(books => books.forEach(bookObj => renderBookAsHTML(bookObj)))
+///////////////////////////////////////////////////////////////

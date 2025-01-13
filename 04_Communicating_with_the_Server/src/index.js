@@ -55,6 +55,7 @@ function renderBook(book) {
     img.alt = book.title
     const button = document.createElement("button")
     button.innerText = "Delete"
+    button.dataset.id = book.id
     button.addEventListener("click", e => e.target.parentElement.remove())
     li.append(h3, pAuthor, pPrice, img, button)
     // figure out where
@@ -71,7 +72,7 @@ function renderBookAsHTML(book) {
         <p>${book.author}</p>
         <p>${formatPrice(book.price)}</p>
         <img src=${book.imageUrl} alt=${book.title}/>
-        <button class="delete-btn">Delete</button>
+        <button data-id=${book.id} class="delete-btn">Delete</button>
     </li>
     `
     document.querySelectorAll(".delete-btn").forEach(btn => {
@@ -107,13 +108,14 @@ newBookButton.addEventListener('click', () => {
 
 const handleSubmit = (e) => {
     e.preventDefault()
-    if (!e.target.title.value) {
+    if (!e.target.title.value.trim()) {
         alert("Title must be present!")
         return
     }
     // how do I extract all of the info from the form -> e.target.NAMEATTRIBUTE.value
     // how do I build ONE object out of it
     const newBook = {
+        id: uuid.v4().slice(0, 4),
         title: e.target.title.value,
         author: e.target.author.value,
         price: Number(e.target.price.value),
@@ -121,21 +123,30 @@ const handleSubmit = (e) => {
         imageUrl: e.target.imageUrl.value,
     }
 
-
     const createBook = async () => {
-        const response = await fetch("http://localhost:3000/books", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newBook)
-        })
-        const createdBook = await response.json()
-        renderBookAsHTML(createdBook)
-        e.target.reset() // EMPTY THE FORM
+        try {
+            const response = await fetch("http://localhost:3000/books", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json", //! specifies the data format in which WE SEND the data
+                    Accept: "application/json",//! specifies the data format in which WE WANT TO RECEIVE the data from the server
+                },
+                body: JSON.stringify(newBook)
+            })
+            if (!response.ok) {
+                window.alert("The server could not process your request")
+                return
+            }
+            // const createdBook = await response.json()
+            e.target.reset() // EMPTY THE FORM
+        } catch (error) {
+            window.alert("The server could not process your request")
+            document.querySelector(`.list-li button[data-id='${newBook.id}']`).parentNode.remove()
+        }
     }
-    createBook()
-
+    createBook() //! async function so it will take time!!!!
+    
+    renderBook(newBook) //! synchronous action, will run first!!!
     // what do I do with the object
 }
 
@@ -161,6 +172,6 @@ const fetchData = async url => {
 
 //! Invoke the logic here
 fetchData("http://localhost:3000/books")
-.then(books => books.forEach(bookObj => renderBookAsHTML(bookObj)))
+.then(books => books.forEach(bookObj => renderBook(bookObj)))
 // .then(books => books.forEach(bookObj => renderBookAsHTML(bookObj)))
 ///////////////////////////////////////////////////////////////

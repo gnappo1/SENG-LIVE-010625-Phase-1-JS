@@ -108,15 +108,15 @@
       "id": "6",
       "title": "Learn Enough JavaScript to Be Dangerous",
       "author": "Michael Hartl",
-      "price": 24,
+      "price": 25,
       "reviews": [
         {
           "userID": 50,
           "content": "pretty good"
         }
       ],
-      "inventory": 5,
-      "imageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQyf6xSyTHc7a8mx17ikh6GeTohc88Hn0UgkN-RNF-h4iOwVlkW"
+      "inventory": 7,
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlLa6jQxRXwxpP_f2HIVFBeftgsOoDDS8XRg&s"
     },
     {
       "id": "7",
@@ -137,20 +137,12 @@
       "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/41oYsXjLvZL._SY344_BO1,204,203,200_.jpg"
     },
     {
-      "id": "19a5",
-      "title": "Will this work?",
-      "author": "Matteo",
-      "price": 0.99,
-      "inventory": 1,
-      "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/51IKycqTPUL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg"
-    },
-    {
-      "id": "d817",
-      "title": "jlfnblkndf",
-      "author": "Matteo",
-      "price": 12,
-      "inventory": 12,
-      "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/51IKycqTPUL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg"
+      "id": "c588",
+      "title": "Test 999",
+      "author": "Myself Who Am I Though?",
+      "price": 122,
+      "inventory": 122,
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx-GV20j3nX6AjTKW7ivxqxNoStHQJhoyxxA&s"
     }
   ]
 }

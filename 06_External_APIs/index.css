@@ -1,0 +1,30 @@
+h1 {
+    text-align: center;
+}
+
+#search-input-container {
+    width: 40%;
+    margin: auto;
+}
+
+#search-input {
+    width: 100%;
+}
+
+#show-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.center {
+    text-align: center;
+}

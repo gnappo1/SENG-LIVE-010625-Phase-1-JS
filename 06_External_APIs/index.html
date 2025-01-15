@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="src/apiKey.js"></script>
+    <title>TV Show Search</title>
+</head>
+<body>
+    <div id="notification" class="bg-red bold center"></div>
+
+    <div id="page-title">
+        <h1>Welcome to the TV Maze Library</h1>
+    </div>
+
+
+    <div id="search-input-container">
+        <input type="text" name="search-input" id="search-input" placeholder="Search for shows by title..." required>
+    </div>
+
+    <div id="spotlight">
+        <h2 id="show-name"></h2>
+        <img src="" alt="" id="show-image">
+        <span id="show-genres"></span>
+        <span id="show-runtime"></span>
+        <span id="show-rating"></span>
+        <p id="show-summary"></p>
+    </div>
+    
+    <div id="show-results"></div>
+    
+    <script src="src/index.js"></script>
+</body>
+</html>
